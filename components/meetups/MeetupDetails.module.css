@@ -1,0 +1,19 @@
+.details {
+  margin-bottom: 0.7rem;
+}
+
+.details h2 {
+  text-align: center;
+}
+
+.details img {
+  width: 100%;
+  max-height: 20rem;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.label {
+  font-weight: bold;
+  margin-top: 0.5rem;
+}

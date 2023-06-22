@@ -1,24 +1,24 @@
+import { useRouter } from "next/router";
 import { Button } from "../common/Button";
 import { Card } from "../common/Card";
+import { MeetupDetails } from "../meetups/MeetupDetails";
 import styles from "./MeetupItem.module.css";
 
-const MeetupItem = (props) => {
-  const { title, image, address } = props;
+export const MeetupItem = ({ id, title, image }) => {
+  const router = useRouter();
+
+  // Used this approach to practice programmatic navigation in the nextJs,
+  // but using just the Link comp instead of the Button comp would be better
+  const showDetails = () => {
+    router.push(`/${id}`);
+  };
+
   return (
     <li className={styles.meetup}>
       <Card>
-        <h3>{title}</h3>
-        <div className={styles.image}>
-          <img src={image} alt={title} />
-        </div>
-        <div className={styles.content}>
-          <div>Address:</div>
-          <address>{address}</address>
-        </div>
-        <Button>Show Details</Button>
+        <MeetupDetails title={title} image={image} />
+        <Button onClick={showDetails}>Show Details</Button>
       </Card>
     </li>
   );
 };
-
-export default MeetupItem;
