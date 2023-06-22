@@ -5,19 +5,13 @@
 }
 
 body {
-  font-family: "Open Sans", sans-serif;
   margin: 0;
   background-color: #fdffee;
+  font-family: "Open Sans", sans-serif;
 }
 
-h1 {
-  color: #2c292b;
-}
-
-h2 {
-  color: #2c292b;
-}
-
+h1,
+h2,
 h3 {
   color: #2c292b;
 }
