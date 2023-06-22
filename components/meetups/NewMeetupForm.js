@@ -3,7 +3,7 @@ import { Button } from "../common/Button";
 import { Card } from "../common/Card";
 import styles from "./NewMeetupForm.module.css";
 
-export const NewMeetupForm = (props) => {
+const NewMeetupForm = (props) => {
   const titleInputRef = useRef();
   const imageInputRef = useRef();
   const addressInputRef = useRef();
@@ -51,3 +51,5 @@ export const NewMeetupForm = (props) => {
     </Card>
   );
 };
+
+export default NewMeetupForm;
