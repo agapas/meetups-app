@@ -4,10 +4,10 @@ import { Card } from "../common/Card";
 import styles from "./NewMeetupForm.module.css";
 
 export const NewMeetupForm = (props) => {
-  const titleInputRef = useRef();
-  const imageInputRef = useRef();
-  const addressInputRef = useRef();
-  const infoInputRef = useRef();
+  const titleInputRef = useRef(null);
+  const imageInputRef = useRef(null);
+  const addressInputRef = useRef(null);
+  const infoInputRef = useRef(null);
 
   const onFormSubmit = (event) => {
     event.preventDefault();
@@ -41,7 +41,7 @@ export const NewMeetupForm = (props) => {
           <input id="address" type="text" required ref={addressInputRef} />
 
           <label htmlFor="info">Meetup Info</label>
-          <textarea id="info" required rows="5" ref={infoInputRef} />
+          <textarea id="info" required rows={5} ref={infoInputRef} />
         </div>
         <Button type="submit">Add Meetup</Button>
       </form>
