@@ -1,21 +1,25 @@
 import styles from "./MeetupDetails.module.css";
 
-export const MeetupDetails = ({ title, image, address, description }) => {
+export const MeetupDetails = ({
+  title,
+  image,
+  address,
+  description,
+  hideMoreInfo = false,
+}) => {
+  const className = hideMoreInfo ? "details" : "detailsWithMoreInfo";
+
   return (
-    <div className={styles.details}>
+    <div className={styles[className]}>
       <h2>{title}</h2>
       <img src={image} alt={title} />
-      {address ? (
-        <>
+      {!hideMoreInfo ? (
+        <div className={styles.infoWrapper}>
           <div className={styles.label}>Address:</div>
           <address>{address}</address>
-        </>
-      ) : null}
-      {description ? (
-        <>
           <div className={styles.label}>Info:</div>
           <div>{description}</div>
-        </>
+        </div>
       ) : null}
     </div>
   );

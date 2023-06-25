@@ -4,8 +4,15 @@
   box-sizing: border-box;
 }
 
+html,
 body {
   margin: 0;
+  width: 100%;
+}
+
+body {
+  min-width: 320px;
+  overflow-y: hidden;
   background-color: #fdffee;
   font-family: "Open Sans", sans-serif;
 }
