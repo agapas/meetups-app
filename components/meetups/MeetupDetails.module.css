@@ -2,10 +2,6 @@
   margin-bottom: 0.7rem;
 }
 
-.details h2 {
-  text-align: center;
-}
-
 .details img {
   width: 100%;
   max-height: 20rem;
@@ -14,7 +10,6 @@
 }
 
 .detailsWithMoreInfo h2 {
-  text-align: center;
   height: 10rem;
   position: relative;
   z-index: 1;

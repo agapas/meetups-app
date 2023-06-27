@@ -1,15 +1,56 @@
-import { Card } from "../components/common/Card";
+import { useRouter } from "next/router";
 import { MeetupDetails } from "../components/meetups/MeetupDetails";
 
-const MeetupDetailsPage = () => {
+const MeetupDetailsPage = ({ meetupData }) => {
+  const router = useRouter();
+
+  const showAllMeetupsPage = () => {
+    router.push("/");
+  };
+
   return (
     <MeetupDetails
-      title="A first meetup"
-      image="https://cdn.shopify.com/s/files/1/0705/7793/articles/29587144738_600x.jpg"
-      address="33 Harcourt St, Saint Kevin's, Dublin 2"
-      description="This is a first in-person meetup which you definitely should not miss. We're aiming to build an enthusiastic and engaged community around this exciting area and hope to learn lots about how people are using their tools. Also, there will be free pizza and drinks and it will be a lot of fun!"
+      {...meetupData}
+      action={{ label: "Show All Meetups", onClickFn: showAllMeetupsPage }}
     />
   );
+};
+
+export const getStaticPaths = async () => {
+  return {
+    fallback: false,
+    paths: [
+      {
+        params: {
+          meetupId: "1",
+        },
+      },
+      {
+        params: {
+          meetupId: "2",
+        },
+      },
+    ],
+  };
+};
+
+export const getStaticProps = async (context) => {
+  // fetch data for a single meetup
+
+  const meetupId = context.params.meetupId;
+
+  return {
+    props: {
+      meetupData: {
+        id: meetupId,
+        title: "A first meetup",
+        image:
+          "https://cdn.shopify.com/s/files/1/0705/7793/articles/29587144738_600x.jpg",
+        address: "33 Harcourt St, Saint Kevin's, Dublin 2",
+        description: "This is a first meetup",
+      },
+    },
+  };
 };
 
 export default MeetupDetailsPage;

@@ -1,4 +1,6 @@
-import { MeetupList } from "@/components/meetups/MeetupList";
+import { MeetupList } from "../components/meetups/MeetupList";
+
+// ToDO: add Favourites page logic
 
 const DUMMY_DATA = [
   {
@@ -13,14 +15,24 @@ const DUMMY_DATA = [
     id: 2,
     title: "A second meetup",
     image:
-      "https://lh3.googleusercontent.com/p/AF1QipNaqwtQ8grcjK98uiHhBOtfgl0K3e_Z1Dy660eE=s1360-w1360-h1020",
+      "https://www.coworker.com/mag/wp-content/uploads/2022/10/The-Tara-Building-1-min-scaled.jpg",
     address: "Tara Building, Tara Street, Dublin 2",
     description: "This is a second meetup.",
   },
 ];
 
-const HomePage = () => {
-  return <MeetupList meetups={DUMMY_DATA} />;
+const HomePage = (props) => {
+  return <MeetupList meetups={props.meetups} />;
+};
+
+export const getStaticProps = async () => {
+  // fetch data from an API
+  return {
+    props: {
+      meetups: DUMMY_DATA,
+    },
+    revalidate: 10,
+  };
 };
 
 export default HomePage;

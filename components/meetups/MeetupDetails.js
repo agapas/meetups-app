@@ -1,3 +1,4 @@
+import { Button } from "../common/Button";
 import styles from "./MeetupDetails.module.css";
 
 export const MeetupDetails = ({
@@ -6,12 +7,14 @@ export const MeetupDetails = ({
   address,
   description,
   hideMoreInfo = false,
+  action,
 }) => {
   const className = hideMoreInfo ? "details" : "detailsWithMoreInfo";
+  const { label, onClickFn } = action || {};
 
   return (
     <div className={styles[className]}>
-      <h2>{title}</h2>
+      <h2 className="center">{title}</h2>
       <img src={image} alt={title} />
       {!hideMoreInfo ? (
         <div className={styles.infoWrapper}>
@@ -21,6 +24,7 @@ export const MeetupDetails = ({
           <div>{description}</div>
         </div>
       ) : null}
+      {label && onClickFn ? <Button onClick={onClickFn}>{label}</Button> : null}
     </div>
   );
 };
