@@ -1,4 +1,4 @@
-import { Button } from "../common/Button";
+import { ButtonList } from "../common/ButtonList";
 import styles from "./MeetupDetails.module.css";
 
 export const MeetupDetails = ({
@@ -7,11 +7,9 @@ export const MeetupDetails = ({
   address,
   description,
   hideMoreInfo = false,
-  action,
+  actions,
 }) => {
   const className = hideMoreInfo ? "details" : "detailsWithMoreInfo";
-  const { label, onClickFn } = action || {};
-
   return (
     <div className={styles[className]}>
       <h2 className="center">{title}</h2>
@@ -24,7 +22,7 @@ export const MeetupDetails = ({
           <div>{description}</div>
         </div>
       ) : null}
-      {label && onClickFn ? <Button onClick={onClickFn}>{label}</Button> : null}
+      <ButtonList actions={actions} adjustMargin={!hideMoreInfo} />
     </div>
   );
 };

@@ -43,7 +43,9 @@ export const NewMeetupForm = (props) => {
           <label htmlFor="info">Meetup Info</label>
           <textarea id="info" required rows={5} ref={infoInputRef} />
         </div>
-        <Button type="submit">Add Meetup</Button>
+        <div className={styles.btn}>
+          <Button type="submit">Add Meetup</Button>
+        </div>
       </form>
     </Card>
   );

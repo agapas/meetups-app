@@ -7,10 +7,10 @@ const MainNavigation = () => {
       <div className={styles.logo}>XYZ Meetups</div>
       <nav>
         <ul>
-          <li>
+          <li key="home">
             <Link href="/">All Meetups</Link>
           </li>
-          <li>
+          <li key="new">
             <Link href="/new-meetup">Add New Meetup</Link>
           </li>
         </ul>

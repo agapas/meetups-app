@@ -11,7 +11,7 @@ const MeetupDetailsPage = ({ meetupData }) => {
   return (
     <MeetupDetails
       {...meetupData}
-      action={{ label: "Show All Meetups", onClickFn: showAllMeetupsPage }}
+      actions={[{ label: "Show All Meetups", onClickFn: showAllMeetupsPage }]}
     />
   );
 };
