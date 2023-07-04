@@ -1,4 +1,6 @@
 import { useRouter } from "next/router";
+import fs from "fs/promises";
+import path from "path";
 import { MeetupDetails } from "../components/meetups/MeetupDetails";
 
 const MeetupDetailsPage = ({ meetupData }) => {
@@ -8,6 +10,10 @@ const MeetupDetailsPage = ({ meetupData }) => {
     router.push("/");
   };
 
+  if (!meetupData) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <MeetupDetails
       {...meetupData}
@@ -16,39 +22,39 @@ const MeetupDetailsPage = ({ meetupData }) => {
   );
 };
 
+const getData = async () => {
+  const filePath = path.join(process.cwd(), "data", "dummy-backend.json");
+  const jsonData = await fs.readFile(filePath, "utf-8");
+  const data = JSON.parse(jsonData);
+  return data;
+};
+
 export const getStaticPaths = async () => {
+  const data = await getData();
+
+  const paths = data.meetups.map((meetup) => ({
+    params: {
+      meetupId: meetup.id,
+    },
+  }));
+
   return {
-    fallback: false,
-    paths: [
-      {
-        params: {
-          meetupId: "1",
-        },
-      },
-      {
-        params: {
-          meetupId: "2",
-        },
-      },
-    ],
+    paths,
+    fallback: true, // for new meetups added via UI
   };
 };
 
 export const getStaticProps = async (context) => {
-  // fetch data for a single meetup
+  const { params } = context;
+  const meetupId = params.meetupId;
 
-  const meetupId = context.params.meetupId;
+  const data = await getData();
+
+  const meetupData = data.meetups.find((meetup) => meetup.id === meetupId);
 
   return {
     props: {
-      meetupData: {
-        id: meetupId,
-        title: "A first meetup",
-        image:
-          "https://cdn.shopify.com/s/files/1/0705/7793/articles/29587144738_600x.jpg",
-        address: "33 Harcourt St, Saint Kevin's, Dublin 2",
-        description: "This is a first meetup",
-      },
+      meetupData,
     },
   };
 };
