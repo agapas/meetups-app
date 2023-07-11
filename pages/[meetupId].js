@@ -49,8 +49,13 @@ export const getStaticProps = async (context) => {
   const meetupId = params.meetupId;
 
   const data = await getData();
-
   const meetupData = data.meetups.find((meetup) => meetup.id === meetupId);
+
+  if (!meetupData) {
+    return {
+      notFound: true,
+    };
+  }
 
   return {
     props: {
