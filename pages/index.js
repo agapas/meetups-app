@@ -11,11 +11,16 @@ const HomePage = (props) => {
 export const getStaticProps = async () => {
   const filePath = path.join(process.cwd(), "data", "dummy-backend.json");
   const jsonData = await fs.readFile(filePath, "utf-8");
-  const data = JSON.parse(jsonData);
+  let data = {};
+  try {
+    data = JSON.parse(jsonData);
+  } catch (error) {
+    console.log(error);
+  }
 
   return {
-    props: { meetups: data.meetups },
-    revalidate: 3600,
+    props: { meetups: data?.meetups || [] },
+    revalidate: 1800, // a half hour
   };
 };
 
