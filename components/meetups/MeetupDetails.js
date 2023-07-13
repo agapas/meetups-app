@@ -1,5 +1,9 @@
+import { useEffect, useState } from "react";
+import Image from "next/image";
 import { ButtonList } from "../common/ButtonList";
 import styles from "./MeetupDetails.module.css";
+
+const fallbackImage = "/assets/Image_not_available.png";
 
 export const MeetupDetails = ({
   title,
@@ -9,19 +13,26 @@ export const MeetupDetails = ({
   hideMoreInfo = false,
   actions,
 }) => {
+  const [imageError, setImageError] = useState(null);
+
+  useEffect(() => {
+    setImageError(null);
+  }, [image]);
+
   const className = hideMoreInfo ? "details" : "detailsWithMoreInfo";
+
   return (
     <div className={styles[className]}>
       <h2 className="center">{title}</h2>
-      {/* Image comp is not used here as the src is dynamic with unknown domains */}
-      <img
-        src={image}
-        alt={title}
-        onError={({ currentTarget }) => {
-          currentTarget.onerror = null; // prevents looping
-          currentTarget.src = "/assets/Image_not_available.png";
-        }}
-      />
+      <div className={styles.imageWrapper}>
+        <Image
+          fill
+          className={imageError ? styles.withBorder : ""}
+          src={imageError ? fallbackImage : image}
+          alt={title}
+          onError={setImageError}
+        />
+      </div>
       {!hideMoreInfo ? (
         <div className={styles.infoWrapper}>
           <div className={styles.label}>Address:</div>
