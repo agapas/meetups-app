@@ -8,6 +8,7 @@ const fallbackImage = "/assets/Image_not_available.png";
 export const MeetupDetails = ({
   title,
   image,
+  imagePriority,
   address,
   description,
   hideMoreInfo = false,
@@ -26,10 +27,12 @@ export const MeetupDetails = ({
       <h2 className="center">{title}</h2>
       <div className={styles.imageWrapper}>
         <Image
-          fill
+          priority={hideMoreInfo ? imagePriority : true}
           className={imageError ? styles.withBorder : ""}
           src={imageError ? fallbackImage : image}
           alt={title}
+          fill
+          sizes="(max-width: 500px) 90vw, (max-width: 768px) 70vw, 40vw"
           onError={setImageError}
         />
       </div>
