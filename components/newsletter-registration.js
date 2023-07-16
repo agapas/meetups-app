@@ -1,12 +1,24 @@
+import { useRef } from "react";
 import { Button } from "./common/Button";
 import styles from "./newsletter-registration.module.css";
 
 export const NewsletterRegistration = () => {
+  const emailInputRef = useRef(null);
+
   const onFormSubmit = (event) => {
     event.preventDefault();
 
-    console.log("Registered");
-    // TODO: finish the logic
+    const email = emailInputRef.current.value;
+
+    fetch("/api/newsletter", {
+      method: "POST",
+      body: JSON.stringify({ email }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => console.log("data: ", data));
   };
 
   return (
@@ -18,6 +30,8 @@ export const NewsletterRegistration = () => {
           id="email"
           placeholder="Your email"
           aria-label="Your email"
+          ref={emailInputRef}
+          required
         />
         <Button type="submit">Register</Button>
       </form>
