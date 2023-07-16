@@ -1,11 +1,17 @@
 import fs from "fs/promises";
 import path from "path";
 import { MeetupList } from "../components/meetups/MeetupList";
+import { NewsletterRegistration } from "../components/newsletter-registration";
 
 // ToDo: add Favourites page logic
 
 const HomePage = (props) => {
-  return <MeetupList meetups={props.meetups} />;
+  return (
+    <>
+      <NewsletterRegistration />
+      <MeetupList meetups={props.meetups} />;
+    </>
+  );
 };
 
 export const getStaticProps = async () => {

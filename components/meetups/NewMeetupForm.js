@@ -34,7 +34,7 @@ export const NewMeetupForm = (props) => {
           <label htmlFor="title">Meetup Title</label>
           <input id="title" type="text" required ref={titleInputRef} />
 
-          <label htmlFor="image">Meetup Image</label>
+          <label htmlFor="image">Meetup Image Url</label>
           <input id="image" type="url" required ref={imageInputRef} />
 
           <label htmlFor="address">Meetup Address</label>
