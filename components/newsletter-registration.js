@@ -5,20 +5,23 @@ import styles from "./newsletter-registration.module.css";
 export const NewsletterRegistration = () => {
   const emailInputRef = useRef(null);
 
-  const onFormSubmit = (event) => {
+  const onFormSubmit = async (event) => {
     event.preventDefault();
 
     const email = emailInputRef.current.value;
 
-    fetch("/api/newsletter", {
+    const response = await fetch("/api/newsletter", {
       method: "POST",
       body: JSON.stringify({ email }),
       headers: {
         "Content-Type": "application/json",
       },
-    })
-      .then((response) => response.json())
-      .then((data) => console.log("data: ", data));
+    });
+
+    const data = await response.json();
+    console.log(data);
+
+    emailInputRef.current.value = "";
   };
 
   return (
