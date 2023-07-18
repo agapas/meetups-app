@@ -18,8 +18,7 @@ export const NewsletterRegistration = () => {
       },
     });
 
-    const data = await response.json();
-    console.log(data);
+    await response.json();
 
     emailInputRef.current.value = "";
   };
