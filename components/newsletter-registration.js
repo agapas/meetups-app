@@ -33,7 +33,7 @@ export const NewsletterRegistration = () => {
           ref={emailInputRef}
           required
         />
-        <Button type="submit">Register</Button>
+        <Button type="submit">Subscribe</Button>
       </form>
     </div>
   );
