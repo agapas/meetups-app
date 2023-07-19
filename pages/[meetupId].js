@@ -48,9 +48,11 @@ export const getStaticProps = async (context) => {
     };
   }
 
+  const { _id, ...rest } = meetupData;
+
   return {
     props: {
-      meetupData: { ...meetupData, _id: meetupId },
+      meetupData: { ...rest, id: meetupId },
     },
   };
 };

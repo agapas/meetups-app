@@ -18,7 +18,7 @@ export const getStaticProps = async () => {
 
   const updatedMeetups = meetups.map((meetup) => {
     const { _id, ...rest } = meetup;
-    return { ...rest, _id: _id.toString() };
+    return { ...rest, id: _id.toString() };
   });
 
   return {
