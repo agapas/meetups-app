@@ -1,5 +1,4 @@
-import fs from "fs/promises";
-import path from "path";
+import { MongoClient } from "mongodb";
 import { MeetupList } from "../components/meetups/MeetupList";
 import { NewsletterRegistration } from "../components/newsletter-registration";
 
@@ -15,17 +14,24 @@ const HomePage = (props) => {
 };
 
 export const getStaticProps = async () => {
-  const filePath = path.join(process.cwd(), "data", "dummy-backend.json");
-  const jsonData = await fs.readFile(filePath, "utf-8");
-  let data = {};
-  try {
-    data = JSON.parse(jsonData);
-  } catch (error) {
-    console.log(error);
-  }
+  const uri =
+    "mongodb+srv://tempUser:tempPasswTest123@cluster0.hfdpj4c.mongodb.net/?retryWrites=true&w=majority";
+
+  const client = new MongoClient(uri);
+  await client.connect();
+
+  const db = client.db("meetups");
+  const collection = db.collection("meetups");
+  const meetups = await collection.find().toArray();
+  client.close();
+
+  const updatedMeetups = meetups.map((meetup) => {
+    const { _id, ...rest } = meetup;
+    return { ...rest, _id: _id.toString() };
+  });
 
   return {
-    props: { meetups: data?.meetups || [] },
+    props: { meetups: updatedMeetups },
     revalidate: 1800, // a half hour
   };
 };

@@ -1,6 +1,4 @@
 import { MongoClient } from "mongodb";
-import fs from "fs";
-import path from "path";
 
 // TODO:
 // - use env for db connection!
