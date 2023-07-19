@@ -1,4 +1,4 @@
-import { MongoClient } from "mongodb";
+import { insertSingleData } from "../../utils";
 
 // TODO:
 // - use env for db connection!
@@ -6,19 +6,7 @@ import { MongoClient } from "mongodb";
 
 const handler = async (req, res) => {
   if (req.method === "POST") {
-    const data = req.body;
-
-    const uri =
-      "mongodb+srv://tempUser:tempPasswTest123@cluster0.hfdpj4c.mongodb.net/?retryWrites=true&w=majority";
-
-    const client = new MongoClient(uri);
-    await client.connect();
-
-    const db = client.db("meetups");
-    const collection = db.collection("meetups");
-
-    await collection.insertOne(data);
-    client.close();
+    insertSingleData("meetups", "meetups", req.body);
 
     res.status(201).json({ message: "Meetup created!" });
   } else {
