@@ -8,7 +8,7 @@ export const MeetupList = ({ meetups = [] }) => {
   return (
     <ul>
       {meetups.map((meetup, index) => (
-        <MeetupItem key={meetup.id} {...meetup} imagePriority={index < 2} />
+        <MeetupItem key={meetup._id} {...meetup} imagePriority={index < 2} />
       ))}
     </ul>
   );

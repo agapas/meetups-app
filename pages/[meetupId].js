@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
-import fs from "fs/promises";
-import path from "path";
 import { MeetupDetails } from "../components/meetups/MeetupDetails";
+import { getData, getDataById } from "../utils";
 
 const MeetupDetailsPage = ({ meetupData }) => {
   const router = useRouter();
@@ -22,19 +21,12 @@ const MeetupDetailsPage = ({ meetupData }) => {
   );
 };
 
-const getData = async () => {
-  const filePath = path.join(process.cwd(), "data", "dummy-backend.json");
-  const jsonData = await fs.readFile(filePath, "utf-8");
-  const data = JSON.parse(jsonData);
-  return data;
-};
-
 export const getStaticPaths = async () => {
-  const data = await getData();
+  const meetupsData = await getData("meetups", "meetups", { _id: 1 });
 
-  const paths = data.meetups.map((meetup) => ({
+  const paths = meetupsData.map((meetup) => ({
     params: {
-      meetupId: meetup.id,
+      meetupId: meetup._id.toString(),
     },
   }));
 
@@ -48,8 +40,7 @@ export const getStaticProps = async (context) => {
   const { params } = context;
   const meetupId = params.meetupId;
 
-  const data = await getData();
-  const meetupData = data.meetups.find((meetup) => meetup.id === meetupId);
+  const meetupData = await getDataById("meetups", "meetups", meetupId);
 
   if (!meetupData) {
     return {
@@ -59,7 +50,7 @@ export const getStaticProps = async (context) => {
 
   return {
     props: {
-      meetupData,
+      meetupData: { ...meetupData, _id: meetupId },
     },
   };
 };

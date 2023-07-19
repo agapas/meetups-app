@@ -12,7 +12,7 @@ export const MeetupItem = (props) => {
   // to practice programmatic navigation in the nextJs, but using here just
   // the Link comp would be better
   const showDetails = () => {
-    router.push(`/${props.id}`);
+    router.push(`/${props._id.toString()}`);
   };
 
   return (
