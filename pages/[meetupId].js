@@ -22,7 +22,7 @@ const MeetupDetailsPage = ({ meetupData }) => {
 };
 
 export const getStaticPaths = async () => {
-  const meetupsData = await getData("meetups", "meetups", { _id: 1 });
+  const meetupsData = await getData("meetups", { _id: 1 });
 
   const paths = meetupsData.map((meetup) => ({
     params: {
@@ -40,7 +40,7 @@ export const getStaticProps = async (context) => {
   const { params } = context;
   const meetupId = params.meetupId;
 
-  const meetupData = await getDataById("meetups", "meetups", meetupId);
+  const meetupData = await getDataById("meetups", meetupId);
 
   if (!meetupData) {
     return {

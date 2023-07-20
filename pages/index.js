@@ -14,7 +14,7 @@ const HomePage = (props) => {
 };
 
 export const getStaticProps = async () => {
-  const meetups = await getData("meetups", "meetups");
+  const meetups = await getData("meetups");
 
   const updatedMeetups = meetups.map((meetup) => {
     const { _id, ...rest } = meetup;

@@ -9,7 +9,7 @@ const handler = async (req, res) => {
       return;
     }
 
-    insertSingleData("newsletter", "emails", { email: userEmail });
+    insertSingleData("newsletter", { email: userEmail });
 
     res.status(201).json({ message: "Signed up successfully!" });
   }

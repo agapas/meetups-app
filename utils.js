@@ -1,6 +1,6 @@
 const { MongoClient, ObjectId } = require("mongodb");
 
-const connectMongoClient = async () => {
+const getConnectedMongoClient = async () => {
   const uri =
     "mongodb+srv://tempUser:tempPasswTest123@cluster0.hfdpj4c.mongodb.net/?retryWrites=true&w=majority";
 
@@ -10,9 +10,9 @@ const connectMongoClient = async () => {
   return client;
 };
 
-export const getData = async (dbName, collectionName, fieldsObj) => {
-  const client = await connectMongoClient();
-  const db = client.db(dbName);
+export const getData = async (collectionName, fieldsObj) => {
+  const client = await getConnectedMongoClient();
+  const db = client.db("meetupsApp");
   const collection = db.collection(collectionName);
 
   const meetupsData = await collection
@@ -24,9 +24,9 @@ export const getData = async (dbName, collectionName, fieldsObj) => {
   return meetupsData;
 };
 
-export const getDataById = async (dbName, collectionName, id) => {
-  const client = await connectMongoClient();
-  const db = client.db(dbName);
+export const getDataById = async (collectionName, id) => {
+  const client = await getConnectedMongoClient();
+  const db = client.db("meetupsApp");
   const collection = db.collection(collectionName);
 
   const data = await collection.findOne({ _id: new ObjectId(id) }, {});
@@ -36,9 +36,9 @@ export const getDataById = async (dbName, collectionName, id) => {
   return data;
 };
 
-export const insertSingleData = async (dbName, collectionName, dataObj) => {
-  const client = await connectMongoClient();
-  const db = client.db(dbName);
+export const insertSingleData = async (collectionName, dataObj) => {
+  const client = await getConnectedMongoClient();
+  const db = client.db("meetupsApp");
   const collection = db.collection(collectionName);
 
   const result = await collection.insertOne(dataObj);

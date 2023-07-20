@@ -6,7 +6,7 @@ import { insertSingleData } from "../../utils";
 
 const handler = async (req, res) => {
   if (req.method === "POST") {
-    insertSingleData("meetups", "meetups", req.body);
+    insertSingleData("meetups", req.body);
 
     res.status(201).json({ message: "Meetup created!" });
   } else {
