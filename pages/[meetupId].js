@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { MeetupDetails } from "../components/meetups/MeetupDetails";
-import { getData, getDataById } from "../utils";
+import { getData, getDataById } from "../utils/db";
 
 const MeetupDetailsPage = ({ meetupData }) => {
   const router = useRouter();

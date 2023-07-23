@@ -1,5 +1,7 @@
 # meetups-app
 
+A simple app with a basic functionality, created just to practice the nextJS with API Routes and learn MongoDB.
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started

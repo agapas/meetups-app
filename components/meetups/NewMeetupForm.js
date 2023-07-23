@@ -27,6 +27,13 @@ export const NewMeetupForm = (props) => {
     props.onAddMeetup(meetupData);
   };
 
+  const clearForm = () => {
+    titleInputRef.current.value = "";
+    imageInputRef.current.value = "";
+    addressInputRef.current.value = "";
+    infoInputRef.current.value = "";
+  };
+
   return (
     <Card>
       <form onSubmit={onFormSubmit}>
@@ -44,6 +51,7 @@ export const NewMeetupForm = (props) => {
           <textarea id="info" required rows={5} ref={infoInputRef} />
         </div>
         <div className={styles.btn}>
+          <Button onClick={clearForm}>Clear Form</Button>
           <Button type="submit">Add Meetup</Button>
         </div>
       </form>

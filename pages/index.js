@@ -1,8 +1,9 @@
 import { MeetupList } from "../components/meetups/MeetupList";
 import { NewsletterRegistration } from "../components/newsletter-registration";
-import { getData } from "../utils";
+import { getData } from "../utils/db";
 
-// ToDo: add Favourites page logic
+// ToDo:
+// - add Favourites page logic with a filter to show all/favourites only
 
 const HomePage = (props) => {
   return (

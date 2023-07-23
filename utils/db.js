@@ -1,6 +1,9 @@
 const { MongoClient, ObjectId } = require("mongodb");
 
-const getConnectedMongoClient = async () => {
+// TODO:
+// - use env for db connection!
+
+export const connectDatabase = async () => {
   const uri =
     "mongodb+srv://tempUser:tempPasswTest123@cluster0.hfdpj4c.mongodb.net/?retryWrites=true&w=majority";
 
@@ -10,8 +13,14 @@ const getConnectedMongoClient = async () => {
   return client;
 };
 
+export const insertSingleData = async (client, collectionName, dataObj) => {
+  const db = client.db("meetupsApp");
+  const collection = db.collection(collectionName);
+  await collection.insertOne(dataObj);
+};
+
 export const getData = async (collectionName, fieldsObj) => {
-  const client = await getConnectedMongoClient();
+  const client = await connectDatabase();
   const db = client.db("meetupsApp");
   const collection = db.collection(collectionName);
 
@@ -25,7 +34,7 @@ export const getData = async (collectionName, fieldsObj) => {
 };
 
 export const getDataById = async (collectionName, id) => {
-  const client = await getConnectedMongoClient();
+  const client = await connectDatabase();
   const db = client.db("meetupsApp");
   const collection = db.collection(collectionName);
 
@@ -34,24 +43,4 @@ export const getDataById = async (collectionName, id) => {
   client.close();
 
   return data;
-};
-
-export const insertSingleData = async (collectionName, dataObj) => {
-  const client = await getConnectedMongoClient();
-  const db = client.db("meetupsApp");
-  const collection = db.collection(collectionName);
-
-  const result = await collection.insertOne(dataObj);
-
-  client.close();
-
-  return result;
-};
-
-export const isEmailValid = (email) => {
-  // A very basic check to follow a pattern: characters@characters.domain,
-  // BUT better solution is sending an email with a link to click
-  const regex = /^[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$/;
-
-  return !!(email && regex.test(email));
 };

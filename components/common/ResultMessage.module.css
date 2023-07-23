@@ -1,0 +1,38 @@
+.message {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin: 0.5rem auto 0;
+  width: 100%;
+  padding: 0.6rem 1.5rem;
+  background-color: rgb(35 150 65);
+  color: white;
+  border-radius: 5px;
+}
+
+.message.error {
+  background-color: rgb(240 50 50);
+}
+
+.message.large {
+  width: 90%;
+  max-width: 640px;
+  margin-bottom: 1rem;
+}
+
+.message.clearable {
+  padding: 0 0.5rem 0 1.5rem;
+}
+
+.message .delete {
+  width: 40px;
+  height: 100%;
+  padding: 0.6rem 1rem;
+  font-size: medium;
+  text-align: end;
+}
+
+.message .delete:hover {
+  cursor: pointer;
+  font-weight: bold;
+}
