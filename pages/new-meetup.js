@@ -4,15 +4,18 @@ import { ResultMessage } from "../components/common/ResultMessage";
 import { NewMeetupForm } from "../components/meetups/NewMeetupForm";
 
 const NewMeetupPage = () => {
+  const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState();
-  const [resultInfo, setResultInfo] = useState();
+  const [resultMessage, setResultMessage] = useState();
 
   const clearResult = () => {
     if (error) setError(undefined);
-    if (resultInfo) setResultInfo(undefined);
+    if (resultMessage) setResultMessage(undefined);
+    if (isPending) setIsPending(false);
   };
 
   const handleOnAddMeetup = async (meetupData) => {
+    setIsPending(true);
     const response = await fetch("/api/new-meetup", {
       method: "POST",
       body: JSON.stringify(meetupData),
@@ -23,10 +26,12 @@ const NewMeetupPage = () => {
 
     const result = await response.json();
 
+    setIsPending(false);
+
     if (result.status >= 400) {
-      setError(result.message);
+      setError(result.message || "Something went wrong");
     } else {
-      setResultInfo(result.message);
+      setResultMessage(result.message || "Success!");
     }
   };
 
@@ -39,18 +44,17 @@ const NewMeetupPage = () => {
           content="Add your own meetups and create amazing networking opportunities."
         />
       </Head>
-      <NewMeetupForm onAddMeetup={handleOnAddMeetup} />
-      {error ? (
+      <NewMeetupForm
+        onAddMeetup={handleOnAddMeetup}
+        onClearForm={clearResult}
+      />
+      {error || resultMessage || isPending ? (
         <ResultMessage
-          isError={true}
+          type={error ? "error" : resultMessage ? "success" : "info"}
           isLarge={true}
           clearFallbackFn={clearResult}
         >
-          {error}
-        </ResultMessage>
-      ) : resultInfo ? (
-        <ResultMessage isLarge={true} clearFallbackFn={clearResult}>
-          {resultInfo}
+          {error ?? resultMessage ?? "Sending data..."}
         </ResultMessage>
       ) : null}
     </div>

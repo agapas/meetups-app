@@ -6,21 +6,25 @@ import styles from "./newsletter-registration.module.css";
 export const NewsletterRegistration = () => {
   const emailInputRef = useRef(null);
 
+  const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState();
-  const [resultInfo, setResultInfo] = useState();
+  const [resultMessage, setResultMessage] = useState();
 
   const clearResult = () => {
     if (error) setError(undefined);
-    if (resultInfo) setResultInfo(undefined);
+    if (resultMessage) setResultMessage(undefined);
   };
 
   const clearEmail = () => {
     if (emailInputRef.current.value) emailInputRef.current.value = "";
+    clearResult();
   };
 
   const onFormSubmit = async (event) => {
     event.preventDefault();
     clearResult();
+
+    setIsPending(true);
 
     const response = await fetch("/api/newsletter", {
       method: "POST",
@@ -31,11 +35,12 @@ export const NewsletterRegistration = () => {
     });
 
     const result = await response.json();
+    setIsPending(false);
 
     if (result.status >= 400) {
-      setError(result.message);
+      setError(result.message || "Something went wrong");
     } else {
-      setResultInfo(result.message);
+      setResultMessage(result.message || "Success!");
     }
   };
 
@@ -60,13 +65,12 @@ export const NewsletterRegistration = () => {
           Subscribe
         </Button>
       </form>
-      {error ? (
-        <ResultMessage isError={true} clearFallbackFn={clearResult}>
-          {error}
-        </ResultMessage>
-      ) : resultInfo ? (
-        <ResultMessage clearFallbackFn={clearResult}>
-          {resultInfo}
+      {error || resultMessage || isPending ? (
+        <ResultMessage
+          type={error ? "error" : resultMessage ? "success" : "info"}
+          clearFallbackFn={clearResult}
+        >
+          {error ?? resultMessage ?? "Subscribing..."}
         </ResultMessage>
       ) : null}
     </div>

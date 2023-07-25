@@ -2,7 +2,7 @@ import styles from "./ResultMessage.module.css";
 
 export const ResultMessage = ({
   children,
-  isError = false,
+  type = "info", // "info" | "success" | "error"
   isLarge = false,
   clearFallbackFn = undefined,
 }) => {
@@ -12,14 +12,14 @@ export const ResultMessage = ({
     }
   };
 
-  const typeClass = `${isError ? styles.error : ""}`;
+  const typeClass = styles[type];
   const sizeClass = `${isLarge ? styles.large : ""}`;
   const xClass = `${clearFallbackFn ? styles.clearable : ""}`;
 
   return (
     <div
       className={`${styles.message} ${typeClass} ${sizeClass} ${xClass}`}
-      title={isError ? "Error message" : "Result message"}
+      title={type === "error" ? "Error message" : "Result message"}
     >
       {children}
       {clearFallbackFn ? (

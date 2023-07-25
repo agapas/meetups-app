@@ -32,6 +32,7 @@ export const NewMeetupForm = (props) => {
     imageInputRef.current.value = "";
     addressInputRef.current.value = "";
     infoInputRef.current.value = "";
+    props.onClearForm();
   };
 
   return (

@@ -5,9 +5,16 @@
   margin: 0.5rem auto 0;
   width: 100%;
   padding: 0.6rem 1.5rem;
-  background-color: rgb(35 150 65);
   color: white;
   border-radius: 5px;
+}
+
+.message.info {
+  background-color: rgb(77 150 220);
+}
+
+.message.success {
+  background-color: rgb(35 150 65);
 }
 
 .message.error {
