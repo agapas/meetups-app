@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { useState } from "react";
 import { ResultMessage } from "../components/common/ResultMessage";
 import { NewMeetupForm } from "../components/meetups/NewMeetupForm";
@@ -31,6 +32,13 @@ const NewMeetupPage = () => {
 
   return (
     <div>
+      <Head>
+        <title>Add New Meetup</title>
+        <meta
+          name="description"
+          content="Add your own meetups and create amazing networking opportunities."
+        />
+      </Head>
       <NewMeetupForm onAddMeetup={handleOnAddMeetup} />
       {error ? (
         <ResultMessage

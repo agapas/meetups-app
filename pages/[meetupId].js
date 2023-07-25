@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { MeetupDetails } from "../components/meetups/MeetupDetails";
 import { getData, getDataById } from "../utils/db";
@@ -14,10 +15,16 @@ const MeetupDetailsPage = ({ meetupData }) => {
   }
 
   return (
-    <MeetupDetails
-      {...meetupData}
-      actions={[{ label: "Show All Meetups", onClickFn: showAllMeetupsPage }]}
-    />
+    <>
+      <Head>
+        <title>{meetupData.title}</title>
+        <meta name="description" content={meetupData.description} />
+      </Head>
+      <MeetupDetails
+        {...meetupData}
+        actions={[{ label: "Show All Meetups", onClickFn: showAllMeetupsPage }]}
+      />
+    </>
   );
 };
 

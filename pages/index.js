@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { MeetupList } from "../components/meetups/MeetupList";
 import { NewsletterRegistration } from "../components/newsletter-registration";
 import { getData } from "../utils/db";
@@ -8,6 +9,13 @@ import { getData } from "../utils/db";
 const HomePage = (props) => {
   return (
     <>
+      <Head>
+        <title>Meetups</title>
+        <meta
+          name="description"
+          content="Browse a list of highly active meetups that will allow you to evolve."
+        />
+      </Head>
       <NewsletterRegistration />
       <MeetupList meetups={props.meetups} />
     </>
