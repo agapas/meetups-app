@@ -5,13 +5,12 @@ import { NewMeetupForm } from "../components/meetups/NewMeetupForm";
 
 const NewMeetupPage = () => {
   const [isPending, setIsPending] = useState(false);
-  const [error, setError] = useState();
-  const [resultMessage, setResultMessage] = useState();
+  const [error, setError] = useState(null);
+  const [resultMessage, setResultMessage] = useState(null);
 
   const clearResult = () => {
-    if (error) setError(undefined);
-    if (resultMessage) setResultMessage(undefined);
-    if (isPending) setIsPending(false);
+    if (error) setError(null);
+    if (resultMessage) setResultMessage(null);
   };
 
   const handleOnAddMeetup = async (meetupData) => {
@@ -50,12 +49,11 @@ const NewMeetupPage = () => {
       />
       {error || resultMessage || isPending ? (
         <ResultMessage
+          message={error ?? resultMessage}
           type={error ? "error" : resultMessage ? "success" : "info"}
           isLarge={true}
           clearFallbackFn={clearResult}
-        >
-          {error ?? resultMessage ?? "Sending data..."}
-        </ResultMessage>
+        />
       ) : null}
     </div>
   );

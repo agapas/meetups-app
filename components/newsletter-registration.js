@@ -7,12 +7,12 @@ export const NewsletterRegistration = () => {
   const emailInputRef = useRef(null);
 
   const [isPending, setIsPending] = useState(false);
-  const [error, setError] = useState();
-  const [resultMessage, setResultMessage] = useState();
+  const [error, setError] = useState(null);
+  const [resultMessage, setResultMessage] = useState(null);
 
   const clearResult = () => {
-    if (error) setError(undefined);
-    if (resultMessage) setResultMessage(undefined);
+    if (error) setError(null);
+    if (resultMessage) setResultMessage(null);
   };
 
   const clearEmail = () => {
@@ -67,11 +67,10 @@ export const NewsletterRegistration = () => {
       </form>
       {error || resultMessage || isPending ? (
         <ResultMessage
+          message={error ?? resultMessage ?? "Subscribing..."}
           type={error ? "error" : resultMessage ? "success" : "info"}
           clearFallbackFn={clearResult}
-        >
-          {error ?? resultMessage ?? "Subscribing..."}
-        </ResultMessage>
+        />
       ) : null}
     </div>
   );

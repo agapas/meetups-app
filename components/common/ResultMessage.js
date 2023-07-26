@@ -1,10 +1,10 @@
 import styles from "./ResultMessage.module.css";
 
 export const ResultMessage = ({
-  children,
+  message = "Sending data...",
   type = "info", // "info" | "success" | "error"
   isLarge = false,
-  clearFallbackFn = undefined,
+  clearFallbackFn,
 }) => {
   const clearMessage = () => {
     if (clearFallbackFn) {
@@ -21,12 +21,12 @@ export const ResultMessage = ({
       className={`${styles.message} ${typeClass} ${sizeClass} ${xClass}`}
       title={type === "error" ? "Error message" : "Result message"}
     >
-      {children}
+      {message}
       {clearFallbackFn ? (
         <div
           className={styles.delete}
           onClick={clearMessage}
-          title="Close message"
+          title="Close the message"
         >
           x
         </div>
