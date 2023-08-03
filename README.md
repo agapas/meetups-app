@@ -1,12 +1,56 @@
 # meetups-app
 
-A simple app with a basic functionality, created just to practice the nextJS with API Routes and learn MongoDB.
+An application with a basic functionality created just to practice the nextJS with the API Routes.
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+#### Important:
 
-## Getting Started
+To make the functionality fully work, the environment variables should be added (for example in the .env.local file added to the project's root directory). The app uses the MongoDB database and it's connection string expects following environment variables:
 
-First, run the development server:
+- DB_DATABASE (for the project's database),
+- DB_CLUSTER (for the project's cluster),
+- DB_USER (for the username),
+- DB_PASS (for the password).
+
+Their values are based on the connection string that should be generated in the MongoDB, but you can adjust these variables and their values based on your preferred database.
+
+#### Things to consider and be aware in the future projects:
+
+- the app is made using the Pages Router (but could be with the App Router once it will be stable)
+- images settings in the next.config should be more specific (to protect the app from malicious users)
+- set the environment variables on the hosting server instead of the .env.local file (to avoid potential security issues)
+- currently Vercel allows for up to 3 projects to be deployed for free (so pay or find another hosting provider)
+
+## Project Setup
+
+### Installation
+
+- download or clone this repo
+
+- go to your local project directory in console and install all packages:
+
+```bash
+npm i
+# or
+yarn
+# or
+pnpm i
+```
+
+### Database setup
+
+The steps below are for the MongoDB as the app uses it, but you can adjust the code (in utils/db.js file) to use any other database if you prefer.
+
+- register to the MongoDB (the MongoDB Atlas is free with shared clusters), then log in
+
+- create new project with new cluster
+
+- add new database user (in project's Database Access) with the "Read and write to any database" built-in role
+
+- set the connection to the application (in the project's cluster) with the Node.js as a driver, then copy generated connection string into your cloned repo code (it will be used in the utils/db.js file inside of the connectDatabase function as the uri variable, so you should adjust it to contain your environment variables)
+
+### Running Project Locally
+
+The project is bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) from [Next.js](https://nextjs.org/). So, following commands can be used to run the project:
 
 ```bash
 npm run dev
@@ -18,25 +62,32 @@ pnpm dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+### Production Build
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+- to run a production build locally use command:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+```bash
+npm run build
+#or
+yarn build
+#or
+pnpm build
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+You can also build the application deploying to hosting provider, for example on [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js. More details: [Next.js deployment documentation](https://nextjs.org/docs/deployment).
 
-## Learn More
+### Production Build Preview
 
-To learn more about Next.js, take a look at the following resources:
+- to preview and test a production build locally use command:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run start
+#or
+yarn start
+#or
+pnpm start
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## License
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+This project is licensed under the [MIT] License - see the [LICENSE.md](LICENSE) file for details.
