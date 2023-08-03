@@ -3,9 +3,6 @@ import { MeetupList } from "../components/meetups/MeetupList";
 import { NewsletterRegistration } from "../components/newsletter-registration";
 import { getData } from "../utils/db";
 
-// ToDo:
-// - add Favourites page logic with a filter to show all/favourites only
-
 const HomePage = (props) => {
   return (
     <>
@@ -22,7 +19,7 @@ const HomePage = (props) => {
   );
 };
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
   const meetups = await getData("meetups");
 
   const updatedMeetups = meetups.map((meetup) => {
@@ -32,7 +29,6 @@ export const getStaticProps = async () => {
 
   return {
     props: { meetups: updatedMeetups },
-    revalidate: 1800, // a half hour
   };
 };
 

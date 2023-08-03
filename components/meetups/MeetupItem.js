@@ -3,8 +3,6 @@ import { Card } from "../common/Card";
 import { MeetupDetails } from "../meetups/MeetupDetails";
 import styles from "./MeetupItem.module.css";
 
-// TODO: add logic for the Favourites
-
 export const MeetupItem = (props) => {
   const router = useRouter();
 
