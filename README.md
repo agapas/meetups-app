@@ -1,8 +1,8 @@
 # meetups-app
 
-An application with a basic functionality created just to practice the nextJS with the API Routes.
+An application with a basic functionality created just to practice the nextJS and it's API Routes.
 
-#### Important:
+### Important:
 
 To make the functionality fully work, the environment variables should be added (for example in the .env.local file added to the project's root directory). The app uses the MongoDB database and it's connection string expects following environment variables:
 
@@ -13,7 +13,7 @@ To make the functionality fully work, the environment variables should be added 
 
 Their values are based on the connection string that should be generated in the MongoDB, but you can adjust these variables and their values based on your preferred database.
 
-#### Things to consider and be aware in the future projects:
+### Things to consider and be aware in the future projects:
 
 - the app is made using the Pages Router (but could be with the App Router once it will be stable)
 - images settings in the next.config should be more specific (to protect the app from malicious users)
@@ -87,6 +87,8 @@ yarn start
 #or
 pnpm start
 ```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see and test the built result.
 
 ## License
 
