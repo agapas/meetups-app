@@ -1,9 +1,7 @@
 const { MongoClient, ObjectId } = require("mongodb");
 
 export const connectDatabase = async () => {
-  const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_CLUSTER}.hfdpj4c.mongodb.net/?retryWrites=true&w=majority`;
-
-  const client = new MongoClient(uri);
+  const client = new MongoClient(process.env.MONGODB_URI);
   await client.connect();
 
   return client;
