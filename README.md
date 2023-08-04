@@ -2,22 +2,10 @@
 
 An application with a basic functionality created just to practice the nextJS and it's API Routes.
 
-### Important:
-
-To make the functionality fully work, the environment variables should be added (for example in the .env.local file added to the project's root directory). The app uses the MongoDB database and it's connection string expects following environment variables:
-
-- DB_DATABASE (for the project's database),
-- DB_CLUSTER (for the project's cluster),
-- DB_USER (for the username),
-- DB_PASS (for the password).
-
-Their values are based on the connection string that should be generated in the MongoDB, but you can adjust these variables and their values based on your preferred database.
-
 ### Things to consider and be aware in the future projects:
 
 - the app is made using the Pages Router (but could be with the App Router once it will be stable)
 - images settings in the next.config should be more specific (to protect the app from malicious users)
-- set the environment variables on the hosting server instead of the .env.local file (to avoid potential security issues)
 - currently Vercel allows for up to 3 projects to be deployed for free (so pay or find another hosting provider)
 
 ## Project Setup
@@ -46,7 +34,23 @@ The steps below are for the MongoDB as the app uses it, but you can adjust the c
 
 - add new database user (in project's Database Access) with the "Read and write to any database" built-in role
 
-- set the connection to the application (in the project's cluster) with the Node.js as a driver, then copy generated connection string into your cloned repo code (it will be used in the utils/db.js file inside of the connectDatabase function as the uri variable, so you should adjust it to contain your environment variables)
+- set the connection to the application (in the project's cluster) with the Node.js as a driver, then copy generated connection string into your cloned repo code (as the MONGODB_URI environment variable)
+
+- add following environment variables (for example via the .env.local file added to the project's root directory):
+
+  - DB_DATABASE (is used in functions inside of the utils/db.js file),
+  - MONGODB_URI (is used in connectDatabase function inside of the utils/db.js file)
+
+  Optionally you can also add DB_CLUSTER, DB_USER and DB_PASS to use within MONGODB_URI for better readability. An example of the .env.local file content:
+
+  ```bash
+  DB_DATABASE=databaseName
+  DB_CLUSTER=clusterName
+  DB_USER=username
+  DB_PASS=user-password
+
+  MONGODB_URI=mongodb+srv://$DB_USER:$DB_PASS@$DB_CLUSTER.hfdpj4c.mongodb.net/$DB_DATABASE?retryWrites=true&w=majority
+  ```
 
 ### Running Project Locally
 
@@ -75,6 +79,8 @@ pnpm build
 ```
 
 You can also build the application deploying to hosting provider, for example on [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js. More details: [Next.js deployment documentation](https://nextjs.org/docs/deployment).
+
+In the case of deploying the app on Vercel Platform, you will need integrate your project with the MongoDB. Full instruction: [MongoDB and Vercel integration](https://www.mongodb.com/developer/products/atlas/how-to-connect-mongodb-atlas-to-vercel-using-the-new-integration/)
 
 ### Production Build Preview
 
