@@ -49,7 +49,7 @@ const NewMeetupPage = () => {
       />
       {error || resultMessage || isPending ? (
         <ResultMessage
-          message={error ?? resultMessage}
+          message={error ?? resultMessage ?? "Adding meetup..."}
           type={error ? "error" : resultMessage ? "success" : "info"}
           isLarge={true}
           clearFallbackFn={clearResult}
