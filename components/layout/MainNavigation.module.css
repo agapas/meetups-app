@@ -32,9 +32,7 @@
   color: #ffe080;
 }
 
-.header a:hover,
-.header a:active,
-.header a.active {
+.header a:hover {
   color: white;
 }
 
